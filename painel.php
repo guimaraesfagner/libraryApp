@@ -45,5 +45,10 @@ mysql_select_db($banco, $conexao) or die ('Não foi possivel conectar ao banco: 
     <![endif]-->
   </head>
   <body>
+
+
+    <!-- Nav bar with ('Cadastrar livros, Cadastrar alunos, Cadastrar professor, cadastrar bibliotecário, cadastrar administrador')! -->
+
+
   </body>
 </html>
