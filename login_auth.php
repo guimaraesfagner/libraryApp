@@ -11,16 +11,16 @@ mysql_select_db($banco, $conexao) or die ('Não foi possivel conectar ao banco: 
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>LibraryApp - Autenticando usuário</title>
+    <title>Autenticando usuário >> LibraryApp</title>
 	<!-- Style -->
 	<link href="css/style.css" rel="stylesheet">
-    
+
 	<!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
@@ -33,10 +33,10 @@ mysql_select_db($banco, $conexao) or die ('Não foi possivel conectar ao banco: 
 	<!-- javascript for autentication -->
 	<script type="text/javascript">
 		function loginsuccessfully() {
-			setTimeout("window.location='painel.php'" , 13000);
+			setTimeout("window.location='painel.php'" , 3000);
 		}
 		function loginfailed(){
-			setTimeout("window.location='login.php'", 150000);
+			setTimeout("window.location='login.php'", 5000);
 		}
 	</script>
   </head>
@@ -46,16 +46,25 @@ mysql_select_db($banco, $conexao) or die ('Não foi possivel conectar ao banco: 
 			$password = $_POST['password'];
 			$sql = mysql_query("SELECT * FROM usuarios WHERE login = '$login' AND senha = '$password'") or die(mysql_error());
 			$row = mysql_num_rows($sql);
-			
-			
+
+
 			if ($row > 0) {
 				session_start();
 				$_SESSION['login']=$_POST['login'];
 				$_SESSION['password']=$_POST['password'];
-				echo "<center>Seja Bem vindo $login !. Aguarde o redirecionamento para o sistema</center>";
+        echo "<br />";
+        echo "<br />";
+        echo "<br />";
+        echo "<br />";
+        echo "<center>Seja Bem vindo $login ! Aguarde o redirecionamento para o sistema.</center>";
+
 				echo "<script>loginsuccessfully()</script>";
 			} else {
-				echo "<center>Nome de usuário ou senha inválida. Aguarde para tentar novamente.</center>";
+        echo "<br />";
+        echo "<br />";
+        echo "<br />";
+        echo "<br />";
+				echo "<center>Nome de usuário ou senha inválida. Aguarde e tente novamente.</center>";
 				echo "<script>loginfailed()</script>";
 			}
 		?>
