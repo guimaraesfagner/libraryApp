@@ -1,3 +1,28 @@
+<?php
+error_reporting (E_ALL & ~ E_NOTICE & ~ E_DEPRECATED);
+$host = "localhost";
+$user = "root";
+$pass = "";
+$banco = "libraryapp";
+$conexao = mysql_connect($host, $user, $pass) or die ('Não foi possivel conectar: ' . mysql_error());
+mysql_select_db($banco, $conexao) or die ('Não foi possivel conectar ao banco: ' . mysql_error());
+?>
+
+<?php
+  session_start();
+  if(!isset($_SESSION["login"]) || !isset($_SESSION["password"])) {
+    header("Location: login.php");
+    exit;
+  } else {
+    echo "<br />";
+    echo "<br />";
+    echo "<br />";
+    echo "<br />";
+    echo "<center> Logado com sucesso!!!</center>";
+  }
+
+
+ ?>
 <!DOCTYPE html>
 <html lang="pt-br">
   <head>
@@ -19,3 +44,6 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
+  <body>
+  </body>
+</html>
