@@ -26,6 +26,17 @@
     <![endif]-->
   </head>
   <body>
+		<script language="Javascript">
+			function deletarLivro(){
+
+				decisao = confirm('Tem certeza que deseja excluir este livro? \n A operação não poderá ser desfeita.');
+		      if (!decisao) {
+						 return false
+					}
+			}
+		</script>
+
+			<input TYPE="BUTTON" NAME="submit" value="Enviar" onclick="Enviar1()" >
   <!-- Title bar -->
 
         <nav class="navbar navbar-inverse" role="navigation">
@@ -105,7 +116,7 @@
 										  <td>" . $resultado["autor"] . "</td>
 										  <td>" . $resultado["categoria"] . "</td>
 										  <td>Editar</td>
-										  <td><a href=\"deletarlivro.php?id=$codigo\">Excluir</td>";
+										  <td><a href=\"deletarlivro.php?id=$codigo\" onclick=\"return deletarLivro()\">Excluir</td>";
 							}
 										}
 
