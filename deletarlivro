@@ -1,0 +1,9 @@
+<?php
+  include_once 'connection.php';
+  include_once 'session.php';
+?>
+
+<?php
+  $id = $_GET[id];
+  $querydeletar = mysql_query("delete from livros where codigo = 'id'"");
+?>

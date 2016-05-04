@@ -1,19 +1,8 @@
 <?php
-	error_reporting (E_ALL & ~ E_NOTICE & ~ E_DEPRECATED);
-	$host = "localhost";
-	$user = "root";
-	$pass = "";
-	$banco = "libraryapp";
-	$conexao = mysql_connect($host, $user, $pass) or die ('Não foi possivel conectar: ' . mysql_error());
-	mysql_select_db($banco, $conexao) or die ('Não foi possivel conectar ao banco: ' . mysql_error());
+	include_once 'connection.php';
+	include_once 'session.php';
 ?>
-<?php
-  session_start();
-  if(!isset($_SESSION["login"]) || !isset($_SESSION["password"])) {
-    header("Location: login.php");
-    exit;
-  }
- ?>
+
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -38,7 +27,7 @@
   </head>
   <body>
   <!-- Title bar -->
-     
+
         <nav class="navbar navbar-inverse" role="navigation">
           <div class="container">
                 <p class="navbar-text">Cadastro de Livros :: LibraryApp</p>
@@ -48,7 +37,7 @@
           </div>
 
   	  </nav>
-       	
+
 <!-- Banner -->
  <div class="container">
   		<div class="banner">
@@ -70,11 +59,11 @@
 				<input type="text" name="txtSearch" id="txtSearch" class="text text-default">
 				<input type="submit" name="btnSearch" value="Pesquisar" class="btn btn-default">
                 <input type="submit" name="btnReset" value="Limpar Pesquisa" class="btn btn-default onclick="window.location.href('minha_url.html');">
-                 					
+
 			</form>
-            
+
 			<br />
-				
+
           		<table width="100%" border="3">
 				  <tbody>
 					<tr>
@@ -85,7 +74,7 @@
 					  <th scope="col">Editar</th>
 					  <th scope="col">Excluir</th>
 					</tr>
-                    
+
 					<?php
 					function pesquisarLivro(){
 						$pesquisa = $_POST['txtSearch'];
@@ -94,31 +83,40 @@
 						if ($row == 0) {
 							echo "<tr>Nenhum resultado encontrado</tr>";
 						} else {
-							while ($resultado=mysql_fetch_array($queryPesquisar)){ 
-								echo "<tr><td>" . $resultado["codigo"] . "</td> 
-										  <td>" . $resultado["livro"] . "</td> 
+							while ($resultado=mysql_fetch_array($queryPesquisar)){
+								echo "<tr><td>" . $resultado["codigo"] . "</td>
+										  <td>" . $resultado["livro"] . "</td>
 										  <td>" . $resultado["autor"] . "</td>
 										  <td>" . $resultado["categoria"] . "</td>
 										  <td>Editar</td>
-										  <td>Excluir</td>"; 
-										  echo "Resultado ok";
+										  <td>Excluir</td>";
 							}
 						}
 					}
-					
+
 					function carregarLivros(){
 						/* Buscar livros no banco */
 						$queryCarregar = mysql_query("select * from livros");
 							/* Enquanto houver dados na tabela, escrever... */
-							while ($escrever=mysql_fetch_array($queryCarregar)){ 
-								echo "<tr><td>" . $escrever["codigo"] . "</td> 
-										  <td>" . $escrever["livro"] . "</td> 
-										  <td>" . $escrever["autor"] . "</td>
-										  <td>" . $escrever["categoria"] . "</td>
+							while ($resultado=mysql_fetch_array($queryCarregar)){
+								$codigo = $resultado["codigo"];
+								echo "<tr><td>" . $resultado["codigo"] . "</td>
+										  <td>" . $resultado["livro"] . "</td>
+										  <td>" . $resultado["autor"] . "</td>
+										  <td>" . $resultado["categoria"] . "</td>
 										  <td>Editar</td>
-										  <td>Excluir</td>"; 
+										  <td><a href=\"deletarlivro.php?id=$codigo\">Excluir</td>";
 							}
 										}
+
+
+							function editarLivro(){
+							}
+
+										if (isset($_POST['btnDelete'])){
+											excluirLivro();
+										}
+
 										if (isset($_POST['btnSearch'])){
 												pesquisarlivro();
 											} else {
@@ -127,7 +125,7 @@
 		?>
 				  </tr>
 				</tbody>
-			 </table>            
+			 </table>
     		</div>
 		</div>
 	</body>
