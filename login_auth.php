@@ -1,3 +1,4 @@
+
 <?php
 error_reporting (E_ALL & ~ E_NOTICE & ~ E_DEPRECATED);
 $host = "localhost";
@@ -6,8 +7,6 @@ $pass = "";
 $banco = "libraryapp";
 $conexao = mysql_connect($host, $user, $pass) or die ('Não foi possivel conectar: ' . mysql_error());
 mysql_select_db($banco, $conexao) or die ('Não foi possivel conectar ao banco: ' . mysql_error());
-
-
 ?>
 
 <!DOCTYPE html>
@@ -36,8 +35,11 @@ mysql_select_db($banco, $conexao) or die ('Não foi possivel conectar ao banco: 
 			setTimeout("window.location='painel.php'" , 3000);
 		}
 		function loginfailed(){
-			setTimeout("window.location='login.php'", 5000);
-		}
+    window.alert("Senha inválida. Tente novamente.");
+    window.location="logout.php";
+
+    }
+    //	setTimeout("window.location='login.php'", 5000);
 	</script>
   </head>
 	<body>
@@ -46,8 +48,6 @@ mysql_select_db($banco, $conexao) or die ('Não foi possivel conectar ao banco: 
 			$password = $_POST['password'];
 			$sql = mysql_query("SELECT * FROM usuarios WHERE login = '$login' AND senha = '$password'") or die(mysql_error());
 			$row = mysql_num_rows($sql);
-
-
 			if ($row > 0) {
 				session_start();
 				$_SESSION['login']=$_POST['login'];
@@ -57,14 +57,12 @@ mysql_select_db($banco, $conexao) or die ('Não foi possivel conectar ao banco: 
         echo "<br />";
         echo "<br />";
         echo "<center>Seja Bem vindo $login ! Aguarde o redirecionamento para o sistema.</center>";
-
 				echo "<script>loginsuccessfully()</script>";
 			} else {
         echo "<br />";
         echo "<br />";
         echo "<br />";
         echo "<br />";
-				echo "<center>Nome de usuário ou senha inválida. Aguarde e tente novamente.</center>";
 				echo "<script>loginfailed()</script>";
 			}
 		?>

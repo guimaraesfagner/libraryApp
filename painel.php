@@ -14,10 +14,6 @@ mysql_select_db($banco, $conexao) or die ('Não foi possivel conectar ao banco: 
     header("Location: login.php");
     exit;
   } else {
-    echo "<br />";
-    echo "<br />";
-    echo "<br />";
-    echo "<br />";
     echo "<center> Logado com sucesso!!!</center>";
   }
 
@@ -45,9 +41,27 @@ mysql_select_db($banco, $conexao) or die ('Não foi possivel conectar ao banco: 
     <![endif]-->
   </head>
   <body>
+    <nav class="navbar navbar-inverse" role="navigation">
+      <div class="container">
+  		    <p class="navbar-text">LibraryApp - Cadastro de Livros</p>
+            <ul class="nav navbar-nav navbar-right">
+				        <li><a href="logout.php">Sair</a></li>
+            </ul>
+      </div>
+
+    </nav>
+
+  	<div class="container">
+  		<div class="banner">
+  			<img src="img/logo_sb.png" class="img-responsive" alt="AppLibrary - Escola Santa Bárbara">
+  		</div>
+      <nav class="navbar navbar-inverse" role="navigation">
+        <div class="menu">
+    		    <p class="navbar-text">  <!-- Nav bar with ('Cadastrar livros, Cadastrar alunos, Cadastrar professor, cadastrar bibliotecário, cadastrar administrador')! --></p>
+        </div>
+      </nav>
 
 
-    <!-- Nav bar with ('Cadastrar livros, Cadastrar alunos, Cadastrar professor, cadastrar bibliotecário, cadastrar administrador')! -->
 
 
   </body>
